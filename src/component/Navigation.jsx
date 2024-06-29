@@ -2,8 +2,8 @@ import NavigationLink from "./NavigationLink";
 
 function Navigation() {
   return (
-    <nav className="w-full shadow-md flex justify-around items-center gap-5 py-4">
-      <div className="flex flex-col">
+    <nav className="max-md:justify-between max-md:gap-3 w-full shadow-md flex justify-around items-center gap-5 p-4">
+      <div className="max-md:hidden flex flex-col">
         <span className="text-2xl font-semibold text-blue-500">Fake Store</span>
         <span className="font-semibold italic text-sm">
           #1 Trusted Fake Store
