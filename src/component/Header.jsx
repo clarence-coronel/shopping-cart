@@ -4,7 +4,9 @@ function Header() {
   return (
     <header className="max-md:justify-between max-md:gap-3 w-full border-b-2 flex justify-around items-center gap-5 p-4">
       <div className="max-md:hidden flex flex-col">
-        <span className="text-2xl font-semibold text-blue-500">Fake Store</span>
+        <span className="text-2xl font-semibold text-purple-600">
+          Fake Store
+        </span>
         <span className="font-semibold italic text-sm">
           #1 Trusted Fake Store
         </span>

@@ -1,12 +1,18 @@
-import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import routes from "./routes";
+import { createContext } from "react";
 
-const router = createBrowserRouter(routes);
+export const Products = createContext();
 
 function App() {
-  return <RouterProvider router={router} />;
+  const router = createBrowserRouter(routes);
+
+  return (
+    <Products.Provider>
+      <RouterProvider router={router} />
+    </Products.Provider>
+  );
 }
 
 export default App;
