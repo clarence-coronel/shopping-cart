@@ -17,6 +17,8 @@ function useData() {
         ...new Set(data.map((product) => product.category)),
       ];
 
+      extractedCategories.unshift("all");
+
       const processedData = { categories: extractedCategories, products: data };
 
       setData(processedData);
