@@ -16,7 +16,7 @@ function App() {
   }, [data]);
 
   return (
-    <Products.Provider value={!loading && data && !error ? data : null}>
+    <Products.Provider value={[data, loading, error]}>
       <RouterProvider router={router} />
     </Products.Provider>
   );
