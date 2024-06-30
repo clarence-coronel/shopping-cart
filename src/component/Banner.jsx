@@ -12,6 +12,15 @@ function Banner() {
       setimageURL(data.products[0].image);
   }, [data]);
 
+  if (loading)
+    return (
+      <div className="h-[400px] max-w-[800px] mx-auto w-full m-2 rounded-md flex justify-between items-start gap-5 overflow-hidden">
+        <div className="max-lg:w-full bg-neutral-200 animate-pulse w-2/3 h-full rounded-md"></div>
+
+        <div className="max-lg:hidden bg-neutral-200 animate-pulse w-1/3 h-full rounded-md"></div>
+      </div>
+    );
+
   return (
     <div className="min-h-[400px] max-w-[800px] mx-auto w-full border-2 p-8 m-2 rounded-md flex justify-between items-start max-md:p-5">
       <div className="my-auto w-full h-full flex flex-col gap-3">

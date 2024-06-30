@@ -20,7 +20,6 @@ function useData() {
       const processedData = { categories: extractedCategories, products: data };
 
       setData(processedData);
-      setLoading(false);
     } catch (error) {
       setError(error);
     } finally {
