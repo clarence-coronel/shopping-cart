@@ -31,7 +31,7 @@ function Header() {
       {/* Main Nav */}
       <nav className="space-x-8">
         <NavigationLink to="/" text="Home" />
-        <NavigationLink to="/shop" text="Shop" />
+        <NavigationLink to="/shop?category=all" text="Shop" />
       </nav>
 
       {/* Cart Nav */}
