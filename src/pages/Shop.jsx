@@ -6,9 +6,20 @@ import ProductsContainer from "../component/ProductContainer";
 function Shop() {
   const [data, loading, error] = useContext(Products);
 
+  const renderDummySquares = (count) => {
+    return Array.from({ length: count }).map((_, index) => (
+      <div
+        key={index}
+        className="bg-neutral-200 animate-pulse aspect-[9/12] w-full max-w-[250px]"
+      ></div>
+    ));
+  };
+
   if (loading)
     return (
-      <div className="w-full max-w-[1400px] mx-auto">Loading placeholder</div>
+      <div className="p-10 grid grid-cols-4 gap-5 w-full max-w-[1400px] mx-auto">
+        {renderDummySquares(10)}
+      </div>
     );
 
   return (

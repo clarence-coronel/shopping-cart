@@ -1,8 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Cart } from "../App";
 
 function Card({ product }) {
   const [cart, setCart] = useContext(Cart);
+  const [buttonContent, setButtonContent] = useState("Add to Cart");
 
   const truncate = (str = "", limit) => {
     if (str.length <= limit) return str;
@@ -26,6 +27,8 @@ function Card({ product }) {
   //   };
 
   const handleClick = (product) => {
+    // setButtonContent("Added to Cart");
+
     if (getQuantity() >= 99) {
       alert("Cart is full.");
       return;
@@ -45,6 +48,12 @@ function Card({ product }) {
     } else {
       setCart([...cart, product]);
     }
+
+    // setTimeout(() => {
+    //   setButtonContent("Add to Cart");
+    // }, 1000);
+
+    alert("Added to Cart.");
   };
 
   return (
@@ -65,7 +74,7 @@ function Card({ product }) {
           onClick={() => handleClick(product)}
           className="hover:bg-purple-700 duration-200 bg-purple-600 text-center text-white p-2 rounded-md"
         >
-          Add To Cart
+          {buttonContent}
         </button>
       </div>
     </div>
