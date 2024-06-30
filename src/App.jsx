@@ -1,13 +1,15 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import routes from "./routes";
-import { createContext, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 import useData from "./hooks/useData";
 
 export const Products = createContext();
+export const Cart = createContext();
 
 function App() {
   const { data, loading, error } = useData();
+  const [cart, setCart] = useState([]);
 
   const router = createBrowserRouter(routes);
 
@@ -17,7 +19,9 @@ function App() {
 
   return (
     <Products.Provider value={[data, loading, error]}>
-      <RouterProvider router={router} />
+      <Cart.Provider value={[cart, setCart]}>
+        <RouterProvider router={router} />
+      </Cart.Provider>
     </Products.Provider>
   );
 }

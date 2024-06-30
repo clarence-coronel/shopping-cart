@@ -1,8 +1,34 @@
+import { useContext } from "react";
+import { Cart } from "../App";
+
 function Card({ product }) {
+  const [cart, setCart] = useContext(Cart);
+
   const truncate = (str = "", limit) => {
     if (str.length <= limit) return str;
 
     return str.substring(0, limit) + "...";
+  };
+
+  //   const addToCart = (newItem) => {
+  //     setCart([...cart, newItem]);
+  //   };
+
+  const handleClick = (product) => {
+    const pastCart = [...cart];
+    const found = pastCart.find((item) => item.id === product.id);
+
+    if (found) {
+      const index = pastCart.findIndex((item) => item.id === product.id);
+
+      pastCart[index].quantity
+        ? pastCart[index].quantity++
+        : (pastCart[index].quantity = 2);
+
+      setCart([...pastCart]);
+    } else {
+      setCart([...cart, product]);
+    }
   };
 
   return (
@@ -19,7 +45,10 @@ function Card({ product }) {
         <span className="text-purple-600 text-xl font-bold">
           ${product.price}
         </span>
-        <button className="hover:bg-purple-700 duration-200 bg-purple-600 text-center text-white p-2 rounded-md">
+        <button
+          onClick={() => handleClick(product)}
+          className="hover:bg-purple-700 duration-200 bg-purple-600 text-center text-white p-2 rounded-md"
+        >
           Add To Cart
         </button>
       </div>
