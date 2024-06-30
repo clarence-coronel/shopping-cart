@@ -10,11 +10,27 @@ function Card({ product }) {
     return str.substring(0, limit) + "...";
   };
 
+  const getQuantity = () => {
+    let quantity = 0;
+
+    cart.forEach((item) => {
+      if (item.quantity) quantity += item.quantity;
+      else quantity++;
+    });
+
+    return quantity;
+  };
+
   //   const addToCart = (newItem) => {
   //     setCart([...cart, newItem]);
   //   };
 
   const handleClick = (product) => {
+    if (getQuantity() >= 99) {
+      alert("Cart is full.");
+      return;
+    }
+
     const pastCart = [...cart];
     const found = pastCart.find((item) => item.id === product.id);
 
