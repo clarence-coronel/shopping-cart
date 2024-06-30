@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useData = () => {
+function useData() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,18 +12,20 @@ const useData = () => {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      setData(data);
+
+      const extractedCategories = [
+        ...new Set(data.map((product) => product.category)),
+      ];
+
+      const processedData = { categories: extractedCategories, products: data };
+
+      setData(processedData);
       setLoading(false);
     } catch (error) {
       setError(error);
     } finally {
       setLoading(false);
     }
-
-    useEffect(() => {
-      fetchData();
-    }, []);
-
     return { data, loading, error };
   };
 
@@ -32,6 +34,6 @@ const useData = () => {
   }, []);
 
   return { data, loading, error };
-};
+}
 
 export default useData;
