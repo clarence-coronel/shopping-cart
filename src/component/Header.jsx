@@ -1,8 +1,8 @@
 import NavigationLink from "./NavigationLink";
 
-function Navigation() {
+function Header() {
   return (
-    <nav className="max-md:justify-between max-md:gap-3 w-full shadow-md flex justify-around items-center gap-5 p-4">
+    <header className="max-md:justify-between max-md:gap-3 w-full border-b-2 flex justify-around items-center gap-5 p-4">
       <div className="max-md:hidden flex flex-col">
         <span className="text-2xl font-semibold text-blue-500">Fake Store</span>
         <span className="font-semibold italic text-sm">
@@ -11,10 +11,10 @@ function Navigation() {
       </div>
 
       {/* Main Nav */}
-      <div className="space-x-8">
+      <nav className="space-x-8">
         <NavigationLink to="/" text="Home" />
-        <NavigationLink to="/" text="Shop" />
-      </div>
+        <NavigationLink to="/shop" text="Shop" />
+      </nav>
 
       {/* Cart Nav */}
       <NavigationLink to="/">
@@ -30,8 +30,8 @@ function Navigation() {
           />
         </svg>
       </NavigationLink>
-    </nav>
+    </header>
   );
 }
 
-export default Navigation;
+export default Header;
