@@ -4,6 +4,7 @@ import { Cart } from "../App";
 function Card({ product }) {
   const [cart, setCart] = useContext(Cart);
   const [buttonContent, setButtonContent] = useState("Add to Cart");
+  const [disabled, setDisabled] = useState(false);
 
   const truncate = (str = "", limit) => {
     if (str.length <= limit) return str;
@@ -22,12 +23,9 @@ function Card({ product }) {
     return quantity;
   };
 
-  //   const addToCart = (newItem) => {
-  //     setCart([...cart, newItem]);
-  //   };
-
   const handleClick = (product) => {
-    // setButtonContent("Added to Cart");
+    setButtonContent("Added to Cart");
+    setDisabled(true);
 
     if (getQuantity() >= 99) {
       alert("Cart is full.");
@@ -49,11 +47,10 @@ function Card({ product }) {
       setCart([...cart, product]);
     }
 
-    // setTimeout(() => {
-    //   setButtonContent("Add to Cart");
-    // }, 1000);
-
-    alert("Added to Cart.");
+    setTimeout(() => {
+      setButtonContent("Add to Cart");
+      setDisabled(false);
+    }, 1000);
   };
 
   return (
@@ -72,7 +69,8 @@ function Card({ product }) {
         </span>
         <button
           onClick={() => handleClick(product)}
-          className="hover:bg-purple-700 duration-200 bg-purple-600 text-center text-white p-2 rounded-md"
+          disabled={disabled}
+          className="disabled:bg-neutral-500 hover:bg-purple-700 duration-200 bg-purple-600 text-center text-white p-2 rounded-md"
         >
           {buttonContent}
         </button>
