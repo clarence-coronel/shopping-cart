@@ -54,12 +54,12 @@ function Card({ product }) {
   };
 
   return (
-    <div className="flex flex-col justify-between border-2 mx-auto duration-200 p-5 rounded-md gap-5">
+    <div className="w-full max-w-[250px] flex flex-col justify-between border-2 mx-auto duration-200 p-5 rounded-md gap-5">
       <div className="group overflow-hidden">
         <img
           className="group-hover:scale-150 duration-1000 w-64 aspect-square object-contain"
           src={product.image}
-          alt=""
+          alt={product.title}
         />
       </div>
       <div className="w-full flex flex-col justify-between pt-5 gap-3">
