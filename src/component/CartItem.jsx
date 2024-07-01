@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Cart as CartData } from "../App";
 
 function CartItem({ product }) {
-  const [cart, setCart] = useContext(CartData);
+  const [cart, dispatch] = useContext(CartData);
   const [quantity, setQuantity] = useState(
     product.quantity ? product.quantity : 1
   );
@@ -10,8 +10,6 @@ function CartItem({ product }) {
     parseFloat(product.quantity ? product.quantity : 1) *
       parseFloat(product.price)
   );
-
-  const index = cart.findIndex((item) => item.id === product.id);
 
   useEffect(() => {
     setTotalPrice(
@@ -27,32 +25,17 @@ function CartItem({ product }) {
   };
 
   const decrease = () => {
-    if (quantity == 1) {
-      const tempCart = cart.filter((item) => item.id !== product.id);
-
-      setCart(tempCart);
-    } else {
-      const tempCart = [...cart];
-
-      tempCart[index].quantity -= 1;
-
-      setQuantity(quantity - 1);
-      setCart([...tempCart]);
-    }
+    dispatch({ type: "decremented", product: product });
+    setQuantity(quantity - 1);
   };
 
   const increase = () => {
-    if (quantity == 9) {
-      alert("Max Item Quantity Reached.");
+    if (quantity > 99) {
+      alert("Max number of items reached.");
       return;
-    } else {
-      const tempCart = [...cart];
-
-      tempCart[index].quantity += 1;
-      setQuantity(quantity + 1);
-
-      setCart([...tempCart]);
     }
+    dispatch({ type: "incremented", product: product });
+    setQuantity(quantity + 1);
   };
 
   //   const handleInputChange = (e) => {

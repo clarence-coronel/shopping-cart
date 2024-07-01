@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Cart } from "../App";
 
 function Card({ product }) {
-  const [cart, setCart] = useContext(Cart);
+  const [cart, dispatch] = useContext(Cart);
   const [buttonContent, setButtonContent] = useState("Add to Cart");
   const [disabled, setDisabled] = useState(false);
 
@@ -32,20 +32,10 @@ function Card({ product }) {
       return;
     }
 
-    const pastCart = [...cart];
-    const found = pastCart.find((item) => item.id === product.id);
+    const found = cart.find((item) => item.id === product.id);
 
-    if (found) {
-      const index = pastCart.findIndex((item) => item.id === product.id);
-
-      pastCart[index].quantity
-        ? pastCart[index].quantity++
-        : (pastCart[index].quantity = 2);
-
-      setCart([...pastCart]);
-    } else {
-      setCart([...cart, product]);
-    }
+    if (found) dispatch({ type: "incremented", product: product });
+    else dispatch({ type: "added", product: product });
 
     setTimeout(() => {
       setButtonContent("Add to Cart");
