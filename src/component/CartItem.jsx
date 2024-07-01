@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { Cart as CartData } from "../App";
-import { parse } from "postcss";
 
 function CartItem({ product }) {
   const [cart, setCart] = useContext(CartData);
@@ -98,9 +97,9 @@ function CartItem({ product }) {
         <img
           className="w-20 h-20 border-2 aspect-square rounded-sm"
           src={product.image}
-          alt=""
+          alt={product.title}
         />
-        <span title={product.title}>{truncate(product.title, 40)}</span>
+        <span title={product.title}>{truncate(product.title, 50)}</span>
       </div>
       <div className="flex flex-col items-center">
         <div className="p-2 flex gap-5 items-center border-purple-600">

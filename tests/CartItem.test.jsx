@@ -1,12 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import Card from "../src/component/Card";
+import CartItem from "../src/component/CartItem";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { Cart } from "../src/App";
-
-const MockCartProvider = ({ children, cartValue }) => (
-  <Cart.Provider value={cartValue}>{children}</Cart.Provider>
-);
 
 const product = {
   category: "men's clothing",
@@ -19,14 +15,19 @@ const product = {
     count: 120,
   },
   title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+  quantity: 2,
 };
 
-describe("Card", () => {
-  it("should display given product info", () => {
+const MockCartProvider = ({ children, cartValue }) => (
+  <Cart.Provider value={cartValue}>{children}</Cart.Provider>
+);
+
+describe("CartItem", () => {
+  it("should display given product info ", () => {
     const cartValue = [[], vi.fn()];
     render(
       <MockCartProvider cartValue={cartValue}>
-        <Card product={product} />
+        <CartItem product={product} />
       </MockCartProvider>
     );
 
@@ -41,12 +42,12 @@ describe("Card", () => {
       ).toBeInTheDocument();
     }
 
-    // Check price
-    expect(screen.getByText("$" + product.price)).toBeInTheDocument();
+    // Check price = price * quantity
+    expect(
+      screen.getByText("$" + product.price * product.quantity)
+    ).toBeInTheDocument();
 
     const img = screen.getByRole("img");
-
-    expect(img).toBeInTheDocument();
 
     expect(img).toHaveAttribute("src", product.image);
   });
